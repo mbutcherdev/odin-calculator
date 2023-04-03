@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="src/style.css" />
+    <title>Odin Calculator</title>
+  </head>
+  <body>
+    <header>
+      <h1>Odin Calculator</h1>
+    </header>
+    <section class="container">
+      <div class="containerChild">
+        <div class="calculator">
+          <div class="display">
+            <div class="calcDisplay">
+              <output class="userInput" type="text" id="current-input"></output>
+              <output class="result" type="text" id="result"></output>
+            </div>
+          </div>
+          <div class="calc-buttons">
+            <button class="clearall" id="cleareverything" data-type="reset">
+              CE
+            </button>
+            <button class="clear" id="clear" data-type="reset">C</button>
+            <button class="operator" id="backspace">⌫</button>
+            <button class="operator" id="divide" data-type="operator" value="/">
+              ÷
+            </button>
+            <button class="digit" id="seven" data-type="number">7</button>
+            <button class="digit" id="eight" data-type="number">8</button>
+            <button class="digit" id="nine" data-type="number">9</button>
+            <button class="operator" id="multiply" data-type="operator">
+              *
+            </button>
+            <button class="digit" id="four" data-type="number">4</button>
+            <button class="digit" id="five" data-type="number">5</button>
+            <button class="digit" id="six" data-type="number">6</button>
+            <button class="operator" id="subtract" data-type="operator">
+              -
+            </button>
+            <button class="digit" id="one" data-type="number">1</button>
+            <button class="digit" id="two" data-type="number">2</button>
+            <button class="digit" id="three" data-type="number">3</button>
+            <button class="operator" id="add" data-type="operator">+</button>
+            <button class="operator" id="negative" data-type="neg_pos">
+              +/-
+            </button>
+            <button class="digit" id="0" data-type="number">0</button>
+            <button class="operator" id="decimal" data-type="decimal">.</button>
+            <button class="operator" id="equals" data-type="equals">=</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <p>
+        Created by
+        <a href="https://github.com/mbutcherdev">Matthew Butcher</a>
+        &copy;
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+      </p>
+    </footer>
+    <script src="src/logic.js"></script>
+  </body>
+</html>
