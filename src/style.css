@@ -1,5 +1,5 @@
 body {
-  background-color: #d5a8fc;
+  background-color: #3ec4f0;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   color: #333;
@@ -27,7 +27,7 @@ h1 {
 
 .calculator {
   border-radius: 1rem;
-  background-color: aqua;
+  background-color: rgb(203, 174, 9);
 }
 
 .calculator .display {
@@ -42,7 +42,7 @@ h1 {
   width: 95%;
   height: 30px;
   border: 0px;
-  background-color: #bc4a4a;
+  background-color: #160f0f;
   padding: 0.6rem;
   border-radius: 0.5rem;
 }
@@ -62,17 +62,18 @@ h1 {
 
 .calc-buttons button {
   border: 0;
-  background-color: #353232;
+  background-color: #6f3535;
   color: #fff;
   font-size: 1.5rem;
   border-radius: 20px;
   padding: 0.5rem;
   cursor: pointer;
   border: transparent;
+  box-shadow: #160f0f 0px 0px 0px 2px inset;
 }
 
 button:hover {
-  background-color: sandybrown;
+  background-color: rgb(118, 96, 244);
 }
 
 a:link {

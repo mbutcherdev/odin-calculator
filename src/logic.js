@@ -14,48 +14,91 @@ let oppo = "";
 calculatorKeys.addEventListener("click", (event) => {
   if (!event.target.closest("button")) return;
 
-  const type = event.target.dataset.type;
   const key = event.target;
   const keyValue = key.textContent;
-  console.log(key, keyValue, type);
+  let displayValue = userInput.textContent;
+  const { type } = key.dataset;
+  if (type != "backspace") {
+    lastKey = keyValue;
+    console.log(lastKey);
+  }
 
   if (type === "reset") {
-    first_number = "";
-    second_number = "";
-    setOperator = "";
-    ontoSecond = false;
-    equalsPressed = false;
-    decimalCheck = "";
-    userInput.textContent = "";
-    results.textContent = "";
-  } else if (type === "number" && !equalsPressed && !ontoSecond) {
-    first_number += event.target.textContent;
-    userInput.textContent = first_number;
-  } else if (type === "operator" && !equalsPressed) {
-    setOperator = event.target.id;
-    oppo = event.target.textContent;
-    userInput.textContent = first_number + " " + oppo;
-    ontoSecond = true;
-  } else if (type === "number" && !equalsPressed && ontoSecond) {
-    second_number += event.target.textContent;
-    userInput.textContent = first_number + " " + oppo + " " + second_number;
-  } else if (type === "equals") {
-    // Work out the operator, perform the calculation
+    clear();
+  }
+  if (type === "backspace") {
+    try {
+      if (!ontoSecond) {
+        first_number.toString();
+        first_number = first_number.slice(0, -1);
+        first_number = Number(first_number);
+        userInput.textContent = first_number;
+      } else {
+        second_number.toString();
+        second_number = second_number.slice(0, -1);
+        second_number = Number(second_number);
+        userInput.textContent = first_number + " " + oppo + " " + second_number;
+      }
+    } catch {
+      alert("You can only undo one number!");
+    }
+  }
+
+  if (type === "number" && !equalsPressed && !ontoSecond) {
+    userInput.textContent += keyValue;
+    first_number += keyValue;
+  }
+  if (type === "operator" && !equalsPressed && ontoSecond) {
     first_number = Number(first_number);
     second_number = Number(second_number);
-    equation = calculate(first_number, setOperator, second_number);
-    results.textContent = equation;
+    first_answer = calculate(first_number, setOperator, second_number);
+    setOperator = key.value;
+    oppo = keyValue;
+    first_number = first_answer;
+    userInput.textContent = first_answer;
+    second_number = "";
+    ontoSecond = false;
+  }
+  if (type === "operator" && !equalsPressed && !ontoSecond) {
+    oppo = keyValue;
+    setOperator = key.value;
+    userInput.textContent += " " + keyValue + " ";
+    ontoSecond = true;
+  }
+  if (type === "number" && !equalsPressed && ontoSecond) {
+    second_number += keyValue;
+    userInput.textContent = first_number + " " + oppo + " " + second_number;
+  }
+
+  if (type === "equals") {
+    first_number = Number(first_number);
+    second_number = Number(second_number);
+    results.textContent = calculate(first_number, setOperator, second_number);
   }
 });
 
 function calculate(first_number, setOperator, second_number) {
-  if (setOperator === "add") {
+  if (setOperator === "+") {
     return first_number + second_number;
-  } else if (setOperator === "subtract") {
+  } else if (setOperator === "-") {
     return first_number - second_number;
-  } else if (setOperator === "multiply") {
+  } else if (setOperator === "*") {
     return first_number * second_number;
-  } else if (setOperator === "divide") {
-    return first_number / second_number;
+  } else if (setOperator === "/") {
+    try {
+      return first_number / second_number;
+    } catch {
+      alert("You can't divide by 0!");
+    }
   }
+}
+
+function clear() {
+  userInput.textContent = "";
+  results.textContent = "";
+  first_number = "";
+  second_number = "";
+  setOperator = "";
+  ontoSecond = false;
+  oppo = "";
 }
