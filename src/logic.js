@@ -165,8 +165,6 @@ function percentage(number) {
 
 // Handle the pos/negative button getting pressed
 function posNeg(number) {
-  if (number > 0) {
-    result = number * -1;
-    displayValue = result;
-  }
+  result = number * -1;
+  displayValue = result;
 }
