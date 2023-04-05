@@ -33,6 +33,7 @@ function registerButtonEvents() {
         console.log(calculatorKeys[i].value);
       } else if (calculatorKeys[i].classList.contains("decimal")) {
         inputDecimal(calculatorKeys[i].value);
+        console.log(calculatorKeys[i].value);
         displayUpdate();
       } else if (calculatorKeys[i].classList.contains("clear")) {
         clear();
@@ -40,7 +41,6 @@ function registerButtonEvents() {
       } else if (calculatorKeys[i].classList.contains("equals")) {
         equals();
         displayUpdate();
-        console.log(calculatorKeys[i].value);
       }
     });
   }
@@ -109,9 +109,17 @@ function equals() {
     secondNumber = displayValue;
     results = calculate(Number(firstNumber), operator, Number(secondNumber));
     resultDisplay(results);
+    displayValue = results;
     firstNumber = results;
     secondNumber = operator = secondOperator = results = null;
   }
+}
+
+// Handle the clear key getting pressed
+function clear() {
+  displayValue = "0";
+  firstNumber = secondNumber = operator = secondOperator = results = null;
+  resultDisplay("");
 }
 
 function calculate(first_number, setOperator, second_number) {
@@ -128,6 +136,16 @@ function calculate(first_number, setOperator, second_number) {
     } else {
       return first_number / second_number;
     }
+  }
+}
+
+// Handle the decimal key getting pressed
+function inputDecimal(dec) {
+  if (displayValue === firstNumber || displayValue === secondNumber) {
+    displayValue = "0";
+    displayValue += dec;
+  } else if (!displayValue.includes(dec)) {
+    displayValue += dec;
   }
 }
 
