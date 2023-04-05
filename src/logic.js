@@ -44,6 +44,9 @@ function registerButtonEvents() {
       } else if (calculatorKeys[i].classList.contains("percent")) {
         percentage(displayValue);
         displayUpdate();
+      } else if (calculatorKeys[i].classList.contains("posNeg")) {
+        posNeg(displayValue);
+        displayUpdate();
       }
     });
   }
@@ -160,6 +163,17 @@ function percentage(number) {
     result = (firstNumber * number) / 100;
     displayValue = result;
     secondNumber = result;
+  }
+}
+
+// Handle the pos/negative button getting pressed
+function posNeg(number) {
+  if (number > 0) {
+    result = number * -1;
+    displayValue = result;
+  } else {
+    result = number * -1;
+    displayValue = result;
   }
 }
 
