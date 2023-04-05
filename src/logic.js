@@ -26,14 +26,11 @@ function registerButtonEvents() {
     calculatorKeys[i].addEventListener("click", function () {
       if (calculatorKeys[i].classList.contains("digit")) {
         inputDigit(calculatorKeys[i].value);
-        console.log(calculatorKeys[i].value);
         displayUpdate();
       } else if (calculatorKeys[i].classList.contains("operator")) {
         inputOperator(calculatorKeys[i].value);
-        console.log(calculatorKeys[i].value);
       } else if (calculatorKeys[i].classList.contains("decimal")) {
         inputDecimal(calculatorKeys[i].value);
-        console.log(calculatorKeys[i].value);
         displayUpdate();
       } else if (calculatorKeys[i].classList.contains("clear")) {
         clear();
@@ -169,9 +166,6 @@ function percentage(number) {
 // Handle the pos/negative button getting pressed
 function posNeg(number) {
   if (number > 0) {
-    result = number * -1;
-    displayValue = result;
-  } else {
     result = number * -1;
     displayValue = result;
   }
