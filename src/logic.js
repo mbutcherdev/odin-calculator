@@ -68,23 +68,27 @@ function inputDigit(digit) {
 }
 
 // Handle the operator inputs (+, -, *, /)
-// Renaming Oppo to Operator, Goodnight Oppy reference intended
 
 function inputOperator(nextOperator) {
   // Working backwards, check if it's second, check if it's third, then default to first
   if (operator != null && secondOperator === null) {
     secondOperator = nextOperator;
-    console.log("second operator");
     secondNumber = displayValue; //
     results = calculate(Number(firstNumber), operator, Number(secondNumber));
-    resultDisplay(results);
-    console.log("Results: " + results);
     displayValue = results;
+    firstNumber = results;
+    resultDisplay(results);
+    results = null;
+  } else if (operator != null && secondOperator != null) {
+    secondNumber = displayValue;
+    results = calculate(Number(firstNumber), secondOperator, Number(secondNumber));
+    secondOperator = nextOperator;
+    displayValue = results;
+    resultDisplay(results);
     firstNumber = results;
     results = null;
   } else {
     operator = nextOperator;
-    console.log("first operator");
     firstNumber = displayValue;
   }
 }
