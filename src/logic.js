@@ -1,3 +1,68 @@
+const calculatorKeys = document.querySelectorAll("button");
+let displayValue = "0";
+let firstNumber = null;
+let secondNumber = null;
+let operator = null;
+let equalsPressed = false;
+
+// Create a function to update the display
+function displayUpdate() {
+  const display = document.querySelector(".userInput");
+  display.innerText = displayValue;
+}
+
+displayUpdate();
+
+// Function to register button clicks
+// Using a loop to assign event listeners to each button
+function registerButtonEvents() {
+  for (let i = 0; i < calculatorKeys.length; i++) {
+    calculatorKeys[i].addEventListener("click", function () {
+      if (calculatorKeys[i].classList.contains("digit")) {
+        inputDigit(calculatorKeys[i].value);
+        console.log(calculatorKeys[i].value);
+        displayUpdate();
+      } else if (calculatorKeys[i].classList.contains("operator")) {
+        inputOperator(calculatorKeys[i].value);
+        console.log(calculatorKeys[i].value);
+      } else if (calculatorKeys[i].classList.contains("decimal")) {
+        inputDecimal(calculatorKeys[i].value);
+        updateDisplay();
+      } else if (calculatorKeys[i].classList.contains("clear")) {
+        clear();
+        updateDisplay();
+      } else if (calculatorKeys[i].classList.contains("equals")) {
+        equals();
+        updateDisplay();
+        console.log(calculatorKeys[i].value);
+      }
+    });
+  }
+}
+
+registerButtonEvents();
+
+// Handle the digit inputs
+
+function inputDigit(digit) {
+  if (firstNumber === null) {
+    if (displayValue === "0" || displayValue === 0) {
+      displayValue = digit;
+    } else if (displayValue === firstNumber) {
+      displayValue = digit;
+    } else {
+      displayValue += digit;
+    }
+  } else {
+    if (displayValue === firstNumber) {
+      displayValue = digit;
+    } else {
+      displayValue += digit;
+    }
+  }
+}
+
+/*
 const calculatorKeys = document.querySelector(".calc-buttons");
 const userInput = document.querySelector(".userInput");
 const calculator = document.querySelector(".calculator");
@@ -102,3 +167,4 @@ function clear() {
   ontoSecond = false;
   oppo = "";
 }
+*/
