@@ -41,6 +41,9 @@ function registerButtonEvents() {
       } else if (calculatorKeys[i].classList.contains("equals")) {
         equals();
         displayUpdate();
+      } else if (calculatorKeys[i].classList.contains("percent")) {
+        percentage(displayValue);
+        displayUpdate();
       }
     });
   }
@@ -146,6 +149,17 @@ function inputDecimal(dec) {
     displayValue += dec;
   } else if (!displayValue.includes(dec)) {
     displayValue += dec;
+  }
+}
+
+// Handle percentage button getting pressed
+function percentage(number) {
+  if (firstNumber === null) {
+    alert("Cannot use percentage on first number");
+  } else {
+    result = (firstNumber * number) / 100;
+    displayValue = result;
+    secondNumber = result;
   }
 }
 
