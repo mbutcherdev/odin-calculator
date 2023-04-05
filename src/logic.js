@@ -33,13 +33,13 @@ function registerButtonEvents() {
         console.log(calculatorKeys[i].value);
       } else if (calculatorKeys[i].classList.contains("decimal")) {
         inputDecimal(calculatorKeys[i].value);
-        updateDisplay();
+        displayUpdate();
       } else if (calculatorKeys[i].classList.contains("clear")) {
         clear();
-        updateDisplay();
+        displayUpdate();
       } else if (calculatorKeys[i].classList.contains("equals")) {
         equals();
-        updateDisplay();
+        displayUpdate();
         console.log(calculatorKeys[i].value);
       }
     });
@@ -85,11 +85,32 @@ function inputOperator(nextOperator) {
     secondOperator = nextOperator;
     displayValue = results;
     resultDisplay(results);
-    firstNumber = results;
+    firstNumber = displayValue;
     results = null;
   } else {
     operator = nextOperator;
     firstNumber = displayValue;
+  }
+}
+
+// Handle equals (=) key getting pressed
+function equals() {
+  // Check 2 numbers minimum exist. If not, return firstNumber
+  if (firstNumber === null) {
+    displayValue = firstNumber;
+  } else if (secondOperator != null && secondNumber != null) {
+    secondNumber = displayValue;
+    results = calculate(Number(firstNumber), secondOperator, Number(secondNumber));
+    displayValue = results;
+    resultDisplay(results);
+    firstNumber = results;
+    secondNumber = operator = secondOperator = results = null;
+  } else {
+    secondNumber = displayValue;
+    results = calculate(Number(firstNumber), operator, Number(secondNumber));
+    resultDisplay(results);
+    firstNumber = results;
+    secondNumber = operator = secondOperator = results = null;
   }
 }
 
@@ -101,10 +122,11 @@ function calculate(first_number, setOperator, second_number) {
   } else if (setOperator === "*") {
     return first_number * second_number;
   } else if (setOperator === "/") {
-    try {
-      return first_number / second_number;
-    } catch {
+    if (second_number === 0) {
       alert("You can't divide by 0!");
+      return 0;
+    } else {
+      return first_number / second_number;
     }
   }
 }
