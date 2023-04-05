@@ -3,6 +3,7 @@ let displayValue = "0";
 let firstNumber = null;
 let secondNumber = null;
 let operator = null;
+let secondOperator = null;
 let equalsPressed = false;
 
 // Create a function to update the display
@@ -10,8 +11,13 @@ function displayUpdate() {
   const display = document.querySelector(".userInput");
   display.innerText = displayValue;
 }
-
 displayUpdate();
+
+// Display the results
+function resultDisplay(results) {
+  const display = document.querySelector(".result");
+  display.innerText = results;
+}
 
 // Function to register button clicks
 // Using a loop to assign event listeners to each button
@@ -39,7 +45,6 @@ function registerButtonEvents() {
     });
   }
 }
-
 registerButtonEvents();
 
 // Handle the digit inputs
@@ -58,6 +63,44 @@ function inputDigit(digit) {
       displayValue = digit;
     } else {
       displayValue += digit;
+    }
+  }
+}
+
+// Handle the operator inputs (+, -, *, /)
+// Renaming Oppo to Operator, Goodnight Oppy reference intended
+
+function inputOperator(nextOperator) {
+  // Working backwards, check if it's second, check if it's third, then default to first
+  if (operator != null && secondOperator === null) {
+    secondOperator = nextOperator;
+    console.log("second operator");
+    secondNumber = displayValue; //
+    results = calculate(Number(firstNumber), operator, Number(secondNumber));
+    resultDisplay(results);
+    console.log("Results: " + results);
+    displayValue = results;
+    firstNumber = results;
+    results = null;
+  } else {
+    operator = nextOperator;
+    console.log("first operator");
+    firstNumber = displayValue;
+  }
+}
+
+function calculate(first_number, setOperator, second_number) {
+  if (setOperator === "+") {
+    return first_number + second_number;
+  } else if (setOperator === "-") {
+    return first_number - second_number;
+  } else if (setOperator === "*") {
+    return first_number * second_number;
+  } else if (setOperator === "/") {
+    try {
+      return first_number / second_number;
+    } catch {
+      alert("You can't divide by 0!");
     }
   }
 }
